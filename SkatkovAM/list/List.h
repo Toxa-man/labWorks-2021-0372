@@ -160,6 +160,8 @@ public:
     void resize(uint);
 
     bool insert(uint pos, const T& val);
+
+    void push_back(const T& val);
 };
 template<typename T>
 List<T>::List(uint size,const T& def)
@@ -277,12 +279,47 @@ void List<T>::resize(uint newSize) {
             return;
         }
         m_last = iter;
-        m_last->m_next = nullptr; // =)
+        m_last->m_next = nullptr;
         m_size = newSize;
         return;
     }
 }
 
+template<typename T>
+bool List<T>::insert(uint pos, const T& val) {
+    if(m_size < pos + 1){
+        return false;
+    }
+    if(m_size == 0) {
+        resize(1);
+        operator[](0) = val;
+        return true;
+    }
+    if(pos+1==m_size) {
+        Node* new_node = new Node(val);
+        new_node->m_prev = m_last;
+        m_last->m_next = new_node;
+        m_last = new_node;
+        ++m_size;
+        return true;
+    }
+    Node* before_new = first().get();
+    for(int i = 0;i<pos-1;i++){
+        before_new = before_new->m_next;
+    }
+    auto after_new = before_new->m_next;
+    Node* new_Node = new Node(val);
+    before_new->m_next = new_Node;
+    new_Node->m_prev = before_new;
+    after_new->m_prev = new_Node;
+    new_Node->m_next = after_new;
+    ++m_size;
+    return true;
+}
 
+template<typename T>
+void List<T>::push_back(const T& val) {
+    insert(m_size-1, val);
+}
 
 #endif //LIST_LIST_H

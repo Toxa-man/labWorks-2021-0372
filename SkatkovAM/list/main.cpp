@@ -6,12 +6,18 @@ void print(const List<T>& toPrint) {
         std::cout<<*it<<' ';
         ++it;
     }
-    std::cout<<std::endl;
 }
 
 
 int main() {
-    List<int> l(0);
-    l.insert(0,5);
+    List<int> l(5,5);
+    std::cout<<std::endl;
     print(l);
+    l.insert(3,10);
+    std::cout<<std::endl;
+    print(l);
+    std::cout<<std::endl;
+    l.push_back(100);
+    print(l);
+    std::cout<<std::endl;
 }
