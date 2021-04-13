@@ -1,3 +1,3 @@
 # My realisation of List
 
-![image](/monkey.jpg)
+![image](monkey.jpg)
