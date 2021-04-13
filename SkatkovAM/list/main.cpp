@@ -11,7 +11,6 @@ void print(const List<T>& toPrint) {
 }
 
 int main() {
-    List<int> l(5);
+    List<int> l(5,5);
     print(l);
-
 }

@@ -7,7 +7,6 @@
 
 #include <iostream>
 
-
 template<typename T>
 class List {
     struct Node {
@@ -19,6 +18,11 @@ class List {
             std::cout << "New ";
             std::cout.flush();
         }
+        Node(const T& init)
+            :m_value(init) {
+            std::cout << "New ";
+            std::cout.flush();
+        }
 
         ~Node() {
             std::cout << "Del ";
@@ -27,7 +31,7 @@ class List {
     };
 
 
-    int m_size = 0;
+    uint m_size = 0;
     Node *m_head = nullptr;
     Node *m_last = nullptr;
 public:
@@ -111,9 +115,11 @@ public:
         }
     };
 
-    explicit List(int size = 0) {
+    explicit List(uint size = 0) {
         resize(size);
     }
+
+    List(uint size,const T& def);
 
     List(const List<T> &);
 
@@ -122,6 +128,10 @@ public:
     List<T> &operator=(const List<T> &);
 
     List<T> &operator=(List<T> &&);
+
+    Node& operator[] (uint i);
+
+    const Node& operator[] (uint i) const;
 
     ~List() {
         resize(0);
@@ -145,32 +155,22 @@ public:
         return iterator(m_last);
     }
 
-    void resize(int);
-//
-//    void insert(const iterator &it, T& value) {
-//        if (it.get() == m_head) {
-//            m_head = new Node;
-//            m_head->m_next = it.get();
-//            it.get()->m_prev = m_head;
-//            m_size++;
-//            m_last = m_head;
-//        } else {
-//            Node *tmp = new Node;
-//            tmp->m_next = it.get();
-//            tmp->m_prev = it.get()->m_prev;
-//            it.get()->m_prev = tmp;
-//            it.get()->m_prev->m_next = it.get();
-//            m_size++;
-//            if (it.get() == m_last) {
-//                m_last = tmp;
-//            }
-//        }
-//    }
-//
-//    void push_back(T & value) {
-//        insert(iterator(m_last), value);
-//    }
+    void resize(uint);
+
 };
+template<typename T>
+List<T>::List(uint size,const T& def)
+                :m_size(size){
+        Node *newNodes = new Node(def);
+            m_head = newNodes;
+        Node *iter = newNodes;
+        for (int i = 0; i < size-1; i++) {
+            iter->m_next = new Node(def);
+            iter->m_next->m_prev = iter;
+            iter = iter->m_next;
+        }
+        m_last = iter; // =)
+}
 
 template<typename T>
 List<T>::List(const List<T> &other) {
@@ -223,14 +223,26 @@ List<T> &List<T>::operator=(List<T> &&other) {
     other.m_size = 0;
     return *this;
 }
+template<typename T>
+typename List<T>::Node& List<T>::operator[] (uint i) {
+    List<T>::iterator it = first();
+    for(uint j=0;j<i;j++){
+        ++it;
+    }
+    return *it;
+}
+template<typename T>
+const typename List<T>::Node& List<T>::operator[] (uint i) const {
+    return (*this)[i];
+}
 
 template<typename T>
-void List<T>::resize(int newSize) {
+void List<T>::resize(uint newSize) {
     if (m_size == newSize) {
         return;
     }
     if (newSize > m_size) {
-        Node *newNodes = new Node;
+        Node *newNodes = new Node();
         if (m_head == nullptr) {
             m_head = newNodes;
         } else {
@@ -239,7 +251,7 @@ void List<T>::resize(int newSize) {
         }
         Node *iter = newNodes;
         for (int i = 0; i < newSize - m_size - 1; i++) {
-            iter->m_next = new Node;
+            iter->m_next = new Node();
             iter->m_next->m_prev = iter;
             iter = iter->m_next;
         }
