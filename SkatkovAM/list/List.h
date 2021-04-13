@@ -40,6 +40,10 @@ public:
     private:
         Node *ptr = nullptr;
     public:
+        Node *get()  {
+            return ptr;
+        }
+
         iterator(Node *ptr_) {
             ptr = ptr_;
         }
@@ -86,9 +90,7 @@ public:
             return ptr->m_value;
         }
 
-        Node *get() const {
-            return ptr;
-        }
+
 
         bool operator== (const iterator &other) const {
             return (other.ptr == ptr);
@@ -129,9 +131,9 @@ public:
 
     List<T> &operator=(List<T> &&);
 
-    Node& operator[] (uint i);
+    T& operator[] (uint i);
 
-    const Node& operator[] (uint i) const;
+    const T& operator[] (uint i) const;
 
     ~List() {
         resize(0);
@@ -157,6 +159,7 @@ public:
 
     void resize(uint);
 
+    bool insert(uint pos, const T& val);
 };
 template<typename T>
 List<T>::List(uint size,const T& def)
@@ -224,15 +227,16 @@ List<T> &List<T>::operator=(List<T> &&other) {
     return *this;
 }
 template<typename T>
-typename List<T>::Node& List<T>::operator[] (uint i) {
+T& List<T>::operator[] (uint i) {
     List<T>::iterator it = first();
     for(uint j=0;j<i;j++){
         ++it;
     }
-    return *it;
+    return *(it.get()->m_value);
 }
+
 template<typename T>
-const typename List<T>::Node& List<T>::operator[] (uint i) const {
+const T& List<T>::operator[] (uint i) const {
     return (*this)[i];
 }
 
@@ -279,5 +283,18 @@ void List<T>::resize(uint newSize) {
     }
 }
 
+//template<typename T>
+//bool List<T>::insert(uint pos, const T& val) {
+//    if(m_size >= pos + 1){
+//        return false;
+//    }
+//    if(m_size == 0) {
+//        resize(1);
+//        operator[](0) = val;
+//        return true;
+//    }
+////    auto it = first();
+////    for(int i =0;)
+//}
 
 #endif //LIST_LIST_H
