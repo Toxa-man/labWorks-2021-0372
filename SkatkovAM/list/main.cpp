@@ -12,6 +12,6 @@ void print(const List<T>& toPrint) {
 
 int main() {
     List<int> l(0);
-//    l.insert(0,5);
+    l.insert(0,5);
     print(l);
 }

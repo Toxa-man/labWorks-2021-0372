@@ -232,7 +232,7 @@ T& List<T>::operator[] (uint i) {
     for(uint j=0;j<i;j++){
         ++it;
     }
-    return *(it.get()->m_value);
+    return (it.get()->m_value);
 }
 
 template<typename T>
@@ -283,18 +283,6 @@ void List<T>::resize(uint newSize) {
     }
 }
 
-//template<typename T>
-//bool List<T>::insert(uint pos, const T& val) {
-//    if(m_size >= pos + 1){
-//        return false;
-//    }
-//    if(m_size == 0) {
-//        resize(1);
-//        operator[](0) = val;
-//        return true;
-//    }
-////    auto it = first();
-////    for(int i =0;)
-//}
+
 
 #endif //LIST_LIST_H
