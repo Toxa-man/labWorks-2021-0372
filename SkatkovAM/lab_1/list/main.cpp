@@ -20,4 +20,10 @@ int main() {
     l.push_back(100);
     print(l);
     std::cout<<std::endl;
+    l.resize(50);
+    l.resize(10);
+    l.insert(0,10);
+    l.insert(10,50);
+    l.resize(0);
+    l.resize(10);
 }

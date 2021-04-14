@@ -303,6 +303,14 @@ bool List<T>::insert(uint pos, const T& val) {
         ++m_size;
         return true;
     }
+    if(pos == 0) {
+        Node* newNode = new Node(val);
+        m_head->m_prev = newNode;
+        newNode->m_next = m_head;
+        m_head = newNode;
+        ++m_size;
+        return true;
+    }
     Node* before_new = first().get();
     for(int i = 0;i<pos-1;i++){
         before_new = before_new->m_next;
