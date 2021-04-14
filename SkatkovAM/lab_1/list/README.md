@@ -1,3 +1,3 @@
-# My realisation of List
+# My list implementation
 
 ![image](monkey.jpg)
