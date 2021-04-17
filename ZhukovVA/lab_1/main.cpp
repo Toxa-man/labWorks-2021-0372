@@ -103,7 +103,7 @@ void List::resize(unsigned size) {
 		}
 		for (int i = size; i < list_size; i++) {
 			nextPtr = ptr->next;
-			delete[] ptr;
+			delete ptr;
 			ptr = nextPtr;
 		}
 		list_size = size;
@@ -162,9 +162,7 @@ int List::find(const T& val) {
 //Insert an element with size incrementation
 bool List::insert(unsigned pos, const T& val) {
 	if (pos < 0 || pos > list_size) {
-		std::cout << "Error: Position is out of range." << std::endl;
-		system("pause");
-		exit(1);
+		return false;
 	}	else {
 		Node* ptr = head;
 		Node* nextPtr = nullptr;
@@ -184,6 +182,7 @@ bool List::insert(unsigned pos, const T& val) {
 		}
 
 		list_size++;
+		return true;
 	}
 }
 
