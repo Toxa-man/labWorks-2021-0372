@@ -99,22 +99,6 @@ public:
         bool operator!= (const iterator &other) const {
             return (other.ptr != ptr);
         }
-
-        bool operator> (const iterator &other) const {
-            return (ptr > other.ptr);
-        }
-
-        bool operator>= (const iterator &other) const {
-            return (ptr >= other.ptr);
-        }
-
-        bool operator< (const iterator &other) const {
-            return (ptr < other.ptr);
-        }
-
-        bool operator<= (const iterator &other) const {
-            return (ptr <= other.ptr);
-        }
     };
 
     explicit List(uint size = 0) {
