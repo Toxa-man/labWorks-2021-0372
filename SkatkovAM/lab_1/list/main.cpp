@@ -24,6 +24,8 @@ int main() {
     l.resize(10);
     l.insert(0,10);
     l.insert(10,50);
+    l.insert(5,3);
+    std::cout<<std::endl<<l.contrains(3);
     l.resize(0);
     l.resize(10);
 }

@@ -323,5 +323,13 @@ uint List<T>::size() const {
     return m_size;
 }
 
-//0
+template<typename T>
+bool List<T>::contrains(const T& val ) const {
+    auto it = first();
+    for(int i = 0;i < m_size;++i,++it) {
+        if(*it==val)
+            return true;
+    }
+    return false;
+}
 #endif //LIST_LIST_H
