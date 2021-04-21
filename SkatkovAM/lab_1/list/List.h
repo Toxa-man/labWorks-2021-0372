@@ -146,6 +146,10 @@ public:
     bool insert(uint pos, const T& val);
 
     void push_back(const T& val);
+
+    uint size() const;
+
+    bool contrains(const T& val ) const;
 };
 template<typename T>
 List<T>::List(uint size,const T& def)
@@ -314,4 +318,10 @@ void List<T>::push_back(const T& val) {
     insert(m_size-1, val);
 }
 
+template<typename T>
+uint List<T>::size() const {
+    return m_size;
+}
+
+//0
 #endif //LIST_LIST_H
