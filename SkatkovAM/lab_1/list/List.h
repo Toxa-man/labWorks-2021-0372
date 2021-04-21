@@ -119,6 +119,18 @@ public:
 
     const T& operator[] (uint i) const;
 
+    void resize(uint);
+
+    bool insert(uint pos, const T& val);
+
+    void push_back(const T& val);
+
+    uint size() const;
+
+    bool contrains(const T& val ) const;
+
+    long find(const T& val) const;
+
     ~List() {
         resize(0);
     }
@@ -140,16 +152,6 @@ public:
     const iterator last() const {
         return iterator(m_last);
     }
-
-    void resize(uint);
-
-    bool insert(uint pos, const T& val);
-
-    void push_back(const T& val);
-
-    uint size() const;
-
-    bool contrains(const T& val ) const;
 };
 template<typename T>
 List<T>::List(uint size,const T& def)
@@ -331,5 +333,15 @@ bool List<T>::contrains(const T& val ) const {
             return true;
     }
     return false;
+}
+
+template<typename T>
+long List<T>::find(const T& val) const {
+    auto it = first();
+    for(int i =0;i<m_size;++i,++it){
+        if(*it==val)
+            return i;
+    }
+    return -1;
 }
 #endif //LIST_LIST_H
