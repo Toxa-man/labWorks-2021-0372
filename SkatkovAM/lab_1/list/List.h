@@ -20,13 +20,13 @@ class List {
         }
         Node(const T& init)
             :m_value(init) {
-            std::cout << "New ";
-            std::cout.flush();
+//            std::cout << "New ";
+//            std::cout.flush();
         }
 
         ~Node() {
-            std::cout << "Del ";
-            std::cout.flush();
+//            std::cout << "Del ";
+//            std::cout.flush();
         }
     };
 
