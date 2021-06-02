@@ -21,17 +21,13 @@ public:
 
   integer operator+ (integer b);
   integer operator- (integer b);
-
-  /*
   integer operator* (integer b);
-
-  integer operator== (integer b);
-  integer operator!= (integer b);
-  integer operator>= (integer b);
-  integer operator<= (integer b);
-  integer operator< (integer b);
-  integer operator> (integer b);
-  */
+  bool operator== (integer b);
+  bool operator!= (integer b);
+  bool operator>= (integer b);
+  bool operator<= (integer b);
+  bool operator< (integer b);
+  bool operator> (integer b);
 };
 
 #endif // INTERGER_HPP
