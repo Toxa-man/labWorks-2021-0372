@@ -1,21 +1,16 @@
 /*Lab 1 Arevalo Parra Carlos Andres*/
-#ifndef NODES_HPP
-#define NODES_HPP
-
+#include <iostream>
 using T=int;
 
 class nodes {
 public:
   T data;
   nodes *next;
+
+  virtual ~nodes () {
+    delete next;
+  }
 };
-
-#endif // NODES_HPP
-#ifndef LIST_HPP
-#define LIST_HPP
-#include <iostream>
-
-using T=int;
 
 class list {
 private:
@@ -30,16 +25,15 @@ public:
   virtual ~list ();
   unsigned size ();
   void resize (unsigned  nsize);
-  T operator[] (unsigned index);
+  T &operator[] (unsigned index);
   void push_back(const T& val);
   bool contains(const T& val);
   int find(const T& val);
 };
 
-#endif // LIST_HPP
-using T=int;
-
-list::list () { }
+list::list () {
+  m_head = nullptr;
+}
 
 list::list (unsigned size): m_size(size) {
 
@@ -77,14 +71,16 @@ list::list (unsigned size): m_size(size) {
 
 }
 
-list::~list () { }
+list::~list () {
+  delete m_head;
+}
 
 unsigned list::size () {
   // Go to the private object
   return m_size;
 }
 
-T list::operator[] (unsigned index) {
+T &list::operator[] (unsigned index) {
   nodes *asked_node = m_head;
 
   for (unsigned i = 0; i < index; i++) {
@@ -98,92 +94,100 @@ void list::push_back(const T& val){
 
   nodes* m = m_head;
 
-while (m->next) {
-
+  while (m->next) {
     m = m->next;
-}
+  }
 
-m->next = new nodes;
+  m->next = new nodes;
 
-m->next->data = val;
+  m->next->data = val;
 
-m_size++;
+  m_size++;
 
 }
 
 void list::resize(int unsigned n_size) {
 
-nodes* ptr = m_head;
-//In this if statememt the program adds space for new elements
-if (n_size < m_size) {
+  nodes* ptr = m_head;
+  if (n_size == 0) {
 
-  nodes* tmp = nullptr;
+    ptr = ptr->next;
+    delete ptr;
+    m_head = nullptr;
+
+  } else if (n_size < m_size) {
+
+    // In this if stament choose how to resize the list with less elements
+
+    for (unsigned int i = 0; i < n_size; i++) {
+
+      ptr = ptr->next;
+
+    }
+
+    delete ptr;
+
+  } else if (n_size > m_size) {
+    //In this if statememt the program adds space for new elements
+
+    for (unsigned int i = 0; i < n_size; i++) {
+
+      if (i+1 >= m_size && i+1 != n_size)
+
+      ptr->next = new nodes;
+
+      ptr = ptr->next;
+    }
+  }
+  m_size = n_size;
+}
+
+bool list::contains(const T& val) {
+
+  nodes* ptr = m_head;
 
   for (unsigned int i = 0; i < m_size; i++) {
 
-    if (i >= n_size) {
+    if (ptr->data == val){
 
-      tmp = ptr-> next;
-
-      delete ptr;
-
-      ptr = tmp;
-
+      return true;
     }
     else{
       ptr = ptr->next;
     }
-    }
-  }// In this if stament choose how to resize the list with less elements
-  else if (n_size > m_size) {
-
-      for (unsigned int i = 0; i < n_size; i++) {
-
-            if (i+1 >= m_size && i+1 != n_size)
-
-            ptr->next = new nodes;
-
-            ptr = ptr->next;
-        }
-    }
-    m_size = n_size;
-}
-bool list::contains(const T& val) {
-
-    nodes* ptr = m_head;
-
-    for (unsigned int i = 0; i < m_size; i++) {
-
-        if (ptr->data == val){
-
-            return true;}
-        else{
-            ptr = ptr->next;}
-    }
-    return false;
+  }
+  return false;
 }
 
 
 int list::find(const T& val) {
 
-    nodes* ptr = m_head;
-//this cicle is for look for the position of the value we want
-    for (unsigned int i = 0; i < m_size; i++) {
+  nodes* ptr = m_head;
+  //this cicle is for look for the position of the value we want
+  for (unsigned int i = 0; i < m_size; i++) {
 
 
-        if (ptr-> data == val){
+    if (ptr-> data == val){
 
-            return i;}
-        else{
-
-            ptr = ptr->next;}
+      return i;
     }
-    return -1;
+    else{
+
+      ptr = ptr->next;
+    }
+  }
+  return -1;
 }
 
 int main(int argc, char const *argv[]) {
 
   list a = list(5);//example for a 5 elements size of the list
+
+  a[0] = 1;
+  a[1] = 2;
+  a[2] = 3;
+  a[3] = 4;
+  a[4] = 5;
 
   std::cout << a[4] << '\n';
 
