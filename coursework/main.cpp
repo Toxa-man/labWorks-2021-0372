@@ -21,8 +21,8 @@ void im_integers (){
 // Here starts the implementation of the class integer with the use of random
 // numbers
 
-  integer A(rand()% 5+1, rand()% 5+1); // (a, b)
-  integer B(rand()% 5+1, rand()% 5+1); // (c, d)
+  integer A(rand()% 10+1, rand()% 10+1); // (a, b)
+  integer B(rand()% 10+1, rand()% 10+1); // (c, d)
   integer C = A + B;
   integer D = A - B;
   bool E = A == B;
@@ -50,8 +50,8 @@ void im_rationals (){
 // Here starts the implementation of the class rationals with the use of random
 // numbers
 
-  rationals AA(rand()% 5+1, rand()% 5+1); // (a, b)
-  rationals BB(rand()% 5+1, rand()% 5+1); // (c, d)
+  rationals AA(rand()% 10+1, rand()% 10+1); // (a, b)
+  rationals BB(rand()% 10+1, rand()% 10+1); // (c, d)
   rationals CC = AA + BB;
   rationals DD = AA - BB;
   rationals EE = AA * BB;
