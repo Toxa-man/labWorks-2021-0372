@@ -1,6 +1,10 @@
 #ifndef RATIONALS_HPP
 #define RATIONALS_HPP
-
+/*
+* This class creates a new type of data <<fractions>> or rational numbers,
+* Can add, dimiss, multiply and divide fractions as needed, the program Can
+* understand this operators and does the operation without simplify the numbers
+*/
 #include <iostream>
 #include <vector>
 
