@@ -1,9 +1,7 @@
 #include "rationals.hpp"
 
 /**
-* Constructor of the class rationals creating the equivalence class.
-* The main idea is that work with a kind of fraction, where the first
-* element is the numerator and the second is the denominator
+* Constructor of the class rationals  is creating the equivalence class.
 */
 rationals::rationals (int a, int b) {
   // Create (0, 0)
