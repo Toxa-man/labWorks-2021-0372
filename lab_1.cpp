@@ -281,9 +281,9 @@ int main()
 	print(l3);
 	//Тест 12
 	std::cout << " Тест 12: очистка списка" << std::endl;
-	l3.rezise(0); 
-	l2.rezise(0);
-	l1.rezise(0);
+	l3.resize(0); 
+	l2.resize(0);
+	l1.resize(0);
 	print(l3);
 	print(l2);
 	print(l1);
