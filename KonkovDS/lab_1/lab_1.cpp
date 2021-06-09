@@ -13,7 +13,7 @@ private:
 	unsigned int listsize;
 
 public:
-	list(); // дефолтный конструктор //destructor
+	list(); // дефолтный конструктор
 	list(const list& clist); //copy-constructor
 	list(unsigned size); //создаёт список размером size и заполняет его дефолтными значениями, т.е. T()
 	list(unsigned size, const T& val); //создаёт список размером size и заполняет его значением val
@@ -21,7 +21,7 @@ public:
 	void destructor(); //destructor
 	unsigned size() const; //возвращает размер списока
 	void resize(unsigned size); // приравнивает размера списока к size; если новый размер больше старого - новые элементы заполнить нулями
-	void removeAt(unsigned index);
+	void removeAt(unsigned index);//удаление элемента на позиции index
 	bool insert(unsigned pos, const T& val); //вставляет val в позицию pos; возвращает true | false в зависимости от успеха операции
 	void push_back(const T& val); //добавляет val в конец списока
 	void pop_front();//удаляет первый элемент списка
