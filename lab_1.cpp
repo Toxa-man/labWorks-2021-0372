@@ -9,7 +9,6 @@ public:
 	List(unsigned size); 
 	List(unsigned size, const T& val);
 	List(const List& list);
-	void destructor();
 	void pop_front();
 	void push_back(const T& value); 
 	void push_front(T value);
@@ -117,15 +116,8 @@ T& List::operator[](unsigned index)
 	}
 }
 
-void List::destructor()
-{
-	while (nsize > 0)
-	{
-		Node* temporary_perm = head;
-		head = head->next;
-		delete temporary_perm;
-		nsize--;
-	}
+List::~List() {
+	resize(0);
 }
 
 
@@ -289,9 +281,9 @@ int main()
 	print(l3);
 	//Тест 12
 	std::cout << " Тест 12: очистка списка" << std::endl;
-	l3.destructor();
-	l2.destructor();
-	l1.destructor();
+	l3.rezise(0); 
+	l2.rezise(0);
+	l1.rezise(0);
 	print(l3);
 	print(l2);
 	print(l1);
