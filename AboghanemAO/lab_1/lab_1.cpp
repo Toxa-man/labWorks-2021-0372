@@ -2,6 +2,7 @@
 #include <string>
 
 using T = int;
+
 struct Node {
 	T value;
 	Node* next;
@@ -15,19 +16,16 @@ class List {
 public:
 	List();
 	List(unsigned size);
-	List(unsigned size, const T & val);
+	List(unsigned size, const T& val);
 
 	unsigned size();
 	void resize(unsigned size);
-	bool insert(unsigned pos, const T & val);
+	bool insert(unsigned pos, const T& val);
 	void push_back(const T& val);
 	bool contains(const T& val);
 	T& operator [](unsigned index);
 	int find(const T& val);
 	void print();
-
-	List(const List& list);
-	List& operator=(const List& list);
 	~List();
 
 };
@@ -51,13 +49,13 @@ List::List(unsigned size) {
 	}
 }
 
-  
-List::List(unsigned size, const T& val){
+
+List::List(unsigned size, const T& val) {
 	size_of_list = size;
 	if (size_of_list > 0) {
 		head = new Node{ val, nullptr };
 		Node* tmp = head;
-		for (int i = 0; i <= size_of_list ; i++) {
+		for (int i = 0; i <= size_of_list; i++) {
 			tmp->next = new Node{ val, nullptr };
 			tmp = tmp->next;
 		}
@@ -162,7 +160,7 @@ bool List::contains(const T& val) {
 void List::print() {
 	Node* tmp = head;
 	for (int i = 0; i < size_of_list; i++) {
-		std::cout << tmp->value << " " ;
+		std::cout << tmp->value << " ";
 		tmp = tmp->next;
 	}
 	std::cout << std::endl;
@@ -188,30 +186,9 @@ List::~List() {
 
 
 
-List::List(const List& list) {
-	Node* tmp = list.head;
-	size_of_list = 0;
-	for (int i = 0; i < list.size_of_list; i++) {
-		insert(i, tmp->value);
-		tmp = tmp->next;
-	}
-}
-
-
-List& List::operator=(const List& list) {
-	Node* tmp = list.head;
-	resize(0);
-	for (int i = 0; i < list.size_of_list; i++) {
-		insert(i, tmp->value);
-		tmp = tmp->next;
-	}
-	return *this;
-}
-
-
 int main() {
 	std::cout << "creates a list of size (size) and fills it with default values\n";
-	List list1{6};
+	List list1{ 6 };
 	list1.print();
 
 	std::cout << "\ncreates a list of size (size) and fills it with (Val) \n";
@@ -219,8 +196,8 @@ int main() {
 	list2.print();
 
 	std::cout << "\nreturns the size of the list \n";
-	list1.print(); 
-	std::cout << "size = "<< list1.size() << std::endl;
+	list1.print();
+	std::cout << "size = " << list1.size() << std::endl;
 
 	std::cout << "\nresize the size of the list\n";
 	list2.resize(10);
@@ -236,23 +213,26 @@ int main() {
 
 	std::cout << "\nreturns true if (val) is present in the list and false otherwise\n";
 	list2.print();
-	if (list2.contains(5)) {
+	if (list2.contains(10)) {
 		std::cout << "true" << std::endl;
 	}
 	else
 	{
 		std::cout << "false" << std::endl;
 	}
-	
+
 	std::cout << "\naccess to the element with index and change it\n";
 	std::cout << "list2[0] : " << list2[0] << std::endl;
 	list2[0] = 10;
 	std::cout << "list2[0] = 10  " << std::endl;
 	std::cout << "list2[0] : " << list2[0] << std::endl;
 
-	std::cout << "\nreturns the index of the first occurrence of (val) in the list or -1 if it is absent\n";
+	std::cout << "\nreturns the index of the last occurrence of (val) in the list or -1 if it is absent\n";
 	list2.print();
-	std::cout << list2.find(1) << std::endl;
-	
+	std::cout << list2.find(10) << std::endl;
+
+	list1.~List();
+	list2.~List();
+
 	return 0;
 }
